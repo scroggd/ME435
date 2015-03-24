@@ -1,0 +1,10 @@
+fprintf(s, 'X-AXIS 1');
+getResponse(s);
+fprintf(s, 'X-AXIS 5');
+getResponse(s);
+fprintf(s, 'X-AXIS 2');
+getResponse(s);
+fprintf(s, 'X-AXIS 4');
+getResponse(s);
+fprintf(s, 'X-AXIS 3');
+getResponse(s);
