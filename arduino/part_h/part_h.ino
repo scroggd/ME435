@@ -67,30 +67,22 @@ void loop() {
     int horz_reading = analogRead(horz_analog);
     int vert_reading = analogRead(vert_analog);
     
-    bool not_done = true;
     
-    if(vert_reading > 900 && not_done){
+    if(vert_reading > 900){
       adjust_angle(4);
       next_joystick_read = time + 100;
-      not_done = false;
-    }
-    
-    if(vert_reading < 100 && not_done){
+
+    }else if(vert_reading < 100){
       adjust_angle(-4);
       next_joystick_read = time + 100;
-      not_done = false;
-    }
-    
-    if(horz_reading > 900 && not_done){
+
+    }else if(horz_reading > 900){
       adjust_angle(-1);
       next_joystick_read = time + 100;
-      not_done = false;
-    }
-    
-    if(horz_reading < 100 && not_done){
+
+    }else if(horz_reading < 100){
       adjust_angle(1);
       next_joystick_read = time + 100;
-      not_done = false;
     }
   }
   
