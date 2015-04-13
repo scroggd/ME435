@@ -8,7 +8,7 @@
 
 
 
-#define PIN_LED 13
+#define PIN_LED 69
 
 char manufacturer[] = "Rose-Hulman";
 char model[] = "LED Toggle";
