@@ -26,7 +26,6 @@ public class Robot {
         positions.put("post2", "POSITION 30 103 -75 -136 90");
         positions.put("pre3", "POSITION -30 157 -90 -167 90");
         positions.put("post3", "POSITION 30 157 -90 -167 90");
-        positions.put("prejoint", "JOINT 5 ANGLE 20");
         positions.put("home", "POSITION 0 90 0 -90 90");
     }
 
@@ -35,41 +34,19 @@ public class Robot {
     }
 
     public void removeBall(final int i){
-        final Robot r = this;
-
-        r.position("home");
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //r.position("prejoint");
-            }
-        }, 2000);
-        h.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                r.position("pre"+(i+1));
-
-            }
-        }, 2500);
-        h.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                r.position("post"+(i+1));
-            }
-        }, 4500);
-        h.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                r.position("home");
-            }
-        }, 5500);
-
         Toast.makeText(a, "Remove ball " + (1+i), Toast.LENGTH_SHORT).show();
+
+        a.sendCommand("ATTACH 111111");
+        a.sendCommand(positions.get("home"));
+        a.sendCommand(positions.get("pre" + (1+i)), 1000);
+        a.sendCommand(positions.get("post" + (1+i)), 3000);
+        a.sendCommand(positions.get("home"), 4000);
     }
 
     public void setSpeed(int left, int right){
-        Toast.makeText(a, "Set speed: " + left + " " + right, Toast.LENGTH_SHORT).show();
         a.sendCommand("WHEEL SPEED " + formatSpeed(left) + " " + formatSpeed(right));
+        a.keys.set("Left", String.format("%d", left));
+        a.keys.set("Right", String.format("%d", right));
     }
 
     public void prepWrist(){
@@ -98,6 +75,7 @@ public class Robot {
             BallColor c1 = charToColor(command.charAt(6));
             BallColor c2 = charToColor(command.charAt(7));
             BallColor c3 = charToColor(command.charAt(8));
+            a.log.say(command);
 
             a.updateBallColors(new BallColor[] {c1, c2, c3});
         }
